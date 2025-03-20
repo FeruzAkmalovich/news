@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+
+
+
+<div class="row d-flex justify-content-around">
+    <div class="col-6">
+      <a href="{{posts.get_absolute_url}}">
+        <div class="card">
+        <img src="{{posts.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{posts.title}}</h5>
+          <p class="card-text">{{posts.description}}</p>
+          <p class="card-text">{{posts.full_info}}</p>
+
+
+        </div>
+      </div>
+    </a>
+    </div>
+    
+
+  </div>
+  <div class="row d-flex justify-content-around">
+    <div class="col-6">
+        <form class="form" action="{% url 'leave_comment' posts.slug %}" method="POST">
+        {% csrf_token %}
+            <input type="text" name="author_name" class="form-control">
+            <textarea class="form-control"  id="comment" name="comment_text" cols="10" rows="1" aria-required="true" placeholder="Оставьте комментарий"></textarea>
+            <br>
+            <button class="button is-primary" type="submit">Leave your comment</button>
+            <button style="margin-bottom: 15px;" class="button is-primary" type="reset">Cancel</button>
+            
+            {% for comment in posts.comments.all %}
+                <p style="margin-left: 6px;" class=""><i>{{comment.author_name}}:</i>{{comment.comment_text}}</p>
+            {% endfor %}
+        </form>
+    </div>
+</div>
+{% endblock content %}

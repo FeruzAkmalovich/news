@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+
+
+
+<div class="row d-flex justify-content-around">
+    {% for item in search_obj %}
+    <div class="col-4">
+      <a href="{{item.get_absolute_url}}">
+        <div class="card">
+        <img src="{{item.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{item.title}}</h5>
+          <p class="card-text">{{item.description}}</p>
+
+
+        </div>
+    </a>
+      </div>
+      {% endfor %}
+</div>
+    
+
+  </div>
+{% endblock content %}
